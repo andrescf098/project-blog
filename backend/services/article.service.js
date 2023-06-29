@@ -1,5 +1,4 @@
 const Model = require("../models/Article");
-const validatorParams = require("../helpers/validatorParams");
 
 async function create(data) {
   const newArticle = Model(data);
@@ -33,7 +32,9 @@ async function findOne(param) {
       { title: { $regex: param, $options: "i" } },
       { content: { $regex: param, $options: "i" } },
     ],
-  }).sort({ date: -1 });
+  })
+    .sort({ date: -1 })
+    .populate("user");
   if (!response) {
     throw boom.notFound("Article not found");
   }
@@ -41,7 +42,7 @@ async function findOne(param) {
 }
 
 async function findById(id) {
-  const article = await Model.findById(id);
+  const article = await Model.findById(id).populate("user");
   if (!article) {
     throw boom.notFound("Article not found");
   }

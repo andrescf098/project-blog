@@ -1,6 +1,7 @@
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
 
+const user = Joi.objectId();
 const id = Joi.objectId();
 const title = Joi.string().min(1);
 const content = Joi.string().min(10);
@@ -11,6 +12,7 @@ const getArticleSchema = Joi.object({
 });
 
 const createArticleSchema = Joi.object({
+  user: user.required(),
   title: title.required(),
   content: content.required(),
   image: image,

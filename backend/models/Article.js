@@ -1,6 +1,10 @@
 const { Schema, model } = require("mongoose");
 
 const ArticleSchema = new Schema({
+  user: {
+    type: Schema.ObjectId,
+    ref: "User",
+  },
   title: {
     type: String,
     required: true,
@@ -19,4 +23,4 @@ const ArticleSchema = new Schema({
   },
 });
 
-module.exports = model("Article", ArticleSchema, "articles");
+module.exports = model("Article", ArticleSchema);
