@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "backend-blog",
   "version": "1.0.0",
   "description": "Proyecto personal de una aplicación web (blog). El proyecto posee backend y fronend",
   "main": "index.js",
@@ -29,6 +29,7 @@
     "mongodb": "^5.6.0",
     "mongoose": "^7.3.1",
     "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.3",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0"

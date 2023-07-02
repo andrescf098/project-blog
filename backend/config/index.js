@@ -6,6 +6,8 @@ const config = {
   dbUser: process.env.DB_USER,
   dbPassword: process.env.DB_PASSWORD,
   jwtSecret: process.env.JWT_SECRET,
+  smtpAccount: process.env.SMTP_ACCOUNT,
+  smtpPassword: process.env.SMTP_PASSWORD,
 };
 
 module.exports = { config };

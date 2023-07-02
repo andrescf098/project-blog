@@ -16,4 +16,22 @@ router.post(
   }
 );
 
+router.post("/recovery", async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    res.json(await Model.sendRecovery(email));
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/change-password", async (req, res, next) => {
+  try {
+    const { token, newPassword } = req.body;
+    res.json(await Model.changePassword(token, newPassword));
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
