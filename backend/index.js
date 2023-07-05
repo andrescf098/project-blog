@@ -1,5 +1,6 @@
 const express = require("express");
 const connection = require("./db/connection.js");
+const cors = require("cors");
 const { config } = require("./config/index.js");
 const routerApi = require("./routes/index.js");
 const {
@@ -9,6 +10,18 @@ const {
 } = require("./middlewares/error.handler");
 
 const app = express();
+
+const whiteListCORS = ["http://localhost:5173"];
+const options = {
+  origin: (origin, callback) => {
+    if (whiteListCORS.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed"));
+    }
+  },
+};
+app.use(cors(options));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

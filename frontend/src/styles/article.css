@@ -1,0 +1,43 @@
+.article-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.article {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 1fr 0.2fr 8fr;
+    margin-top: 44px;
+    background: white;
+    margin-right: 34px;
+    border: 1px solid var(--text2);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.article .article-header {
+    padding: 40px;
+}
+
+.article .article-header h1 {
+    font-size: 2.25rem;
+    margin-bottom: 8px;
+}
+
+.article .article-header h3 {
+    color: var(--text-links);
+}
+
+.article .article-separator {
+    height: 1px;
+    width: 100%;
+    background: var(--text2);
+}
+
+.article .article-body {
+    padding: 10px 40px;
+}
+
+.article .article-body p {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+}
