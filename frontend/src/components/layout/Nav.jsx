@@ -2,14 +2,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/navbar.css";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useContext } from "react";
 import { Loginbar } from "../pages/login/Login-bar";
+import { GlobalStateContext } from "../../context";
 
 export const Nav = () => {
-  const [showLoginBar, setShowLoginBar] = useState(false);
+  const context = useContext(GlobalStateContext);
 
   const showLogin = () => {
-    setShowLoginBar((current) => !current);
+    context.setShowLoginBar((current) => !current);
+    console.log(context.showLoginBar);
   };
 
   return (
@@ -23,9 +25,16 @@ export const Nav = () => {
             <NavLink to="/">Home</NavLink>
           </li>
 
-          <li>
-            <NavLink to="/article">My articles</NavLink>
-          </li>
+          {context.login && (
+            <>
+              <li>
+                <NavLink to="/my-articles">My articles</NavLink>
+              </li>
+              <li>
+                <NavLink to="/create">Create article</NavLink>
+              </li>
+            </>
+          )}
         </ul>
         <ul className="nav-options">
           <li>
@@ -36,7 +45,7 @@ export const Nav = () => {
           </li>
         </ul>
       </div>
-      {showLoginBar && <Loginbar />}
+      {context.showLoginBar && <Loginbar />}
     </nav>
   );
 };

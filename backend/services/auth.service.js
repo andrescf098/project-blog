@@ -1,4 +1,5 @@
 const userService = require("./user.service");
+const userModel = require("../models/User");
 const boom = require("@hapi/boom");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -72,14 +73,15 @@ async function sendEmail(infoMail) {
 async function changePassword(token, newPassword) {
   try {
     const payload = jwt.verify(token, config.jwtSecret);
-    const user = await userService.findOne(payload.sub);
+    const user = await userModel.findById(payload.sub);
+    console.log(user);
     if (user.recoveryToken !== token) {
       throw boom.unauthorized();
     }
     const hash = await bcrypt.hash(newPassword, 10);
     await userService.update(user.id, {
       recoveryToken: null,
-      password: newPassword,
+      password: hash,
     });
     return { message: "password changed" };
   } catch (error) {

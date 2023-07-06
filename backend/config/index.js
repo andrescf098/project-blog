@@ -7,7 +7,7 @@ const config = {
   dbPassword: process.env.DB_PASSWORD,
   jwtSecret: process.env.JWT_SECRET,
   smtpAccount: process.env.SMTP_ACCOUNT,
-  smtpPassword: process.env.SMTP_PASSWORD,
+  smtpPassword: process.env.SMTP_PASS,
 };
 
 module.exports = { config };

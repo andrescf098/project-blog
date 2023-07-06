@@ -1,4 +1,5 @@
 const Model = require("../models/Article");
+const boom = require("@hapi/boom");
 
 async function create(data) {
   const newArticle = Model(data);

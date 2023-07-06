@@ -7,6 +7,12 @@ const {
   createArticleSchema,
   updateArticleSchema,
 } = require("../schemas/article.schema");
+const passport = require("passport");
+const {
+  checkAuthorizedRoles,
+  checkIdForArticle,
+} = require("../middlewares/auth.handler");
+const ROLES = require("../utils/auth/permissions.util");
 
 router.get("/:limit?", async (req, res, next) => {
   try {
@@ -38,7 +44,11 @@ router.get("/find/:find", async (req, res, next) => {
 
 router.post(
   "/",
-  [validatorHandler(createArticleSchema, "body")],
+  [
+    passport.authenticate("jwt", { session: false }),
+    validatorHandler(createArticleSchema, "body"),
+    checkAuthorizedRoles(...ROLES.registeredUser),
+  ],
   async (req, res, next) => {
     try {
       res.status(201).json(await service.create(req.body));
@@ -51,8 +61,27 @@ router.post(
 router.patch(
   "/article/:id",
   [
+    passport.authenticate("jwt", { session: false }),
     validatorHandler(getArticleSchema, "params"),
     validatorHandler(updateArticleSchema, "body"),
+    checkAuthorizedRoles(...ROLES.registeredUser),
+    checkIdForArticle(),
+  ],
+  async (req, res, next) => {
+    try {
+      res.status(200).json(await service.update(req.params.id, req.body));
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+router.patch(
+  "/admin/:id",
+  [
+    passport.authenticate("jwt", { session: false }),
+    validatorHandler(getArticleSchema, "params"),
+    validatorHandler(updateArticleSchema, "body"),
+    checkAuthorizedRoles(...ROLES.admin),
   ],
   async (req, res, next) => {
     try {
@@ -65,7 +94,28 @@ router.patch(
 
 router.delete(
   "/article/:id",
-  [validatorHandler(getArticleSchema, "params")],
+  [
+    passport.authenticate("jwt", { session: false }),
+    validatorHandler(getArticleSchema, "params"),
+    checkAuthorizedRoles(...ROLES.registeredUser),
+    checkIdForArticle(),
+  ],
+  async (req, res, next) => {
+    try {
+      res.status(200).json(await service.delete(req.params.id));
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.delete(
+  "/admin/:id",
+  [
+    passport.authenticate("jwt", { session: false }),
+    validatorHandler(getArticleSchema, "params"),
+    checkAuthorizedRoles(...ROLES.admin),
+  ],
   async (req, res, next) => {
     try {
       res.status(200).json(await service.delete(req.params.id));

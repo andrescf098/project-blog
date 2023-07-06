@@ -10,7 +10,7 @@ const {
 const passport = require("passport");
 const {
   checkAuthorizedRoles,
-  checkId,
+  checkIdForUser,
 } = require("../middlewares/auth.handler");
 const ROLES = require("../utils/auth/permissions.util");
 
@@ -31,12 +31,7 @@ router.get(
 
 router.get(
   "/:id",
-  [
-    passport.authenticate("jwt", { session: false }),
-    checkAuthorizedRoles(...ROLES.registeredUser),
-    checkId(),
-    validatorHandler(getUserSchema, "params"),
-  ],
+  [validatorHandler(getUserSchema, "params")],
   async (req, res, next) => {
     try {
       const id = req.params.id;
@@ -63,8 +58,37 @@ router.post(
 router.patch(
   "/:id",
   [
+    passport.authenticate("jwt", { session: false }),
     validatorHandler(getUserSchema, "params"),
+    checkAuthorizedRoles(...ROLES.registeredUser),
+    checkIdForUser(),
     validatorHandler(updateUserSchema, "body"),
+  ],
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      res.json(await service.update(id, body));
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.get("/email/:email", async (req, res, next) => {
+  try {
+    const { email } = req.params;
+    res.json(await service.findByEmail(email));
+  } catch (error) {
+    next(error);
+  }
+});
+router.patch(
+  "/admin/:id",
+  [
+    passport.authenticate("jwt", { session: false }),
+    validatorHandler(getUserSchema, "params"),
+    checkAuthorizedRoles(...ROLES.admin),
   ],
   async (req, res, next) => {
     try {
@@ -79,7 +103,11 @@ router.patch(
 
 router.delete(
   "/:id",
-  [validatorHandler(getUserSchema, "params")],
+  [
+    passport.authenticate("jwt", { session: false }),
+    validatorHandler(getUserSchema, "params"),
+    checkAuthorizedRoles(...ROLES.admin),
+  ],
   async (req, res, next) => {
     try {
       const { id } = req.params;

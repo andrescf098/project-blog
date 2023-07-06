@@ -31,7 +31,8 @@
     margin-right: 4px;
 }
 
-.login-bar li a {
+.login-bar li a,
+.login-bar li p {
     text-decoration: none;
     font-size: 1.5rem;
     line-height: 1.8rem;

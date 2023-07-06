@@ -20,23 +20,27 @@ async function find() {
 }
 
 async function findOne(id) {
+  let response = {};
   const user = await Model.findById(id);
-  const articles = await ModelArticle.find({ user: user._id });
+  const articles = await ModelArticle.find({ user: user.id });
   const userData = {
-    _id: user[0]._id,
-    name: user[0].name,
-    lastname: user[0].lastname,
-    email: user[0].email,
-    role: user[0].role,
+    _id: user._id,
+    name: user.name,
+    lastname: user.lastname,
+    email: user.email,
+    role: user.role,
   };
-  if (!user || !articles) {
+  if (!user) {
     throw boom.notFound("User not found");
   }
-  const response = {
-    ...userData,
-    articles: articles,
-  };
-  return response;
+  if (!articles) {
+    return userData;
+  } else {
+    return (response = {
+      ...userData,
+      articles: articles,
+    });
+  }
 }
 
 async function findByEmail(email) {
