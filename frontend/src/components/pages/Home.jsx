@@ -3,6 +3,7 @@ import { global } from "../../helpers/global";
 import "../../styles/home.css";
 import { useEffect, useState } from "react";
 import ListArticle from "./article/ListArticle";
+import NotFoundArticle from "./article/NotFoundArticle";
 
 export const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -24,14 +25,16 @@ export const Home = () => {
             return (
               <ListArticle
                 key={index}
-                createAt={article.createAt}
+                userId={article.user}
+                date={article.createAt}
                 title={article.title}
+                description={article.description}
                 content={article.content}
               />
             );
           })
         ) : (
-          <h1>Articles not found</h1>
+          <NotFoundArticle />
         )}
       </div>
     </div>

@@ -62,7 +62,12 @@ async function create(data) {
 }
 
 async function update(id, data) {
-  const user = await Model.findByIdAndUpdate(id, data, { new: true });
+  const hash = await bcrypt.hash(data.password, 10);
+  const dataUpdate = {
+    ...data,
+    password: hash,
+  };
+  const user = await Model.findByIdAndUpdate(id, dataUpdate, { new: true });
   if (!user) {
     throw boom.notFound("User not found");
   }

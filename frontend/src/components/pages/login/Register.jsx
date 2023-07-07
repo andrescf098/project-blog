@@ -1,11 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "../../../styles/register.css";
 import { useForm } from "../../../hooks/useForm";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { global } from "../../../helpers/global";
 import { fetchHelper } from "../../../helpers/fetchHelper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { GlobalStateContext } from "../../../context";
 
 export const Register = () => {
   const { state, changed } = useForm({});
@@ -14,6 +15,7 @@ export const Register = () => {
   const [internalError, setInternalError] = useState(false);
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
+  const context = useContext(GlobalStateContext);
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -113,7 +115,10 @@ export const Register = () => {
             </form>
           </div>
           <p>
-            Do you have an account? <NavLink to="/login">Sign in</NavLink>
+            Do you have an account?{" "}
+            <NavLink to="/login" onClick={() => context.setShowLoginBar(false)}>
+              Sign in
+            </NavLink>
           </p>
         </>
       )}

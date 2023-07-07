@@ -30,4 +30,4 @@ export const getIdFromToken = () => {
     console.error(error);
   }
 };
-// export default { loginVerficiation, adminVerificator };
+export default { loginVerficiation, adminVerificator };
