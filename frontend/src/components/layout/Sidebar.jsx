@@ -53,7 +53,7 @@ export const Sidebar = () => {
               <div className="card-content">
                 <div className="card-info">
                   <h2>{article.title}</h2>
-                  <h3>{article.createAt}</h3>
+                  <h3>{article.createAt.split("T")[0]}</h3>
                 </div>
                 <img
                   className="logo-user"

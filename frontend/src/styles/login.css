@@ -56,14 +56,21 @@
 .login-form {
     display: flex;
     flex-direction: column;
+    text-align: center;
     margin: 12px;
+}
+
+.login-form .lb-info {
+    padding: 8px;
+    font-size: 1.2rem;
 }
 
 .login-form input[type="text"],
 .login-form input[type="password"] {
     margin: 8px;
     padding: 6px 6px 6px 12px;
-    width: 220px;
+    width: auto;
+    min-width: 220px;
     height: 26px;
     border: 1px solid var(--text2);
     outline: 0;

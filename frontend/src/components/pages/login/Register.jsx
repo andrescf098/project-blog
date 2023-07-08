@@ -1,18 +1,27 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "../../../styles/register.css";
-import { useForm } from "../../../hooks/useForm";
 import { useContext, useState } from "react";
 import { global } from "../../../helpers/global";
 import { fetchHelper } from "../../../helpers/fetchHelper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { GlobalStateContext } from "../../../context";
+import { statusCode } from "../../../helpers/statusCode";
 
 export const Register = () => {
-  const { state, changed } = useForm({});
   const [error, setError] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [internalError, setInternalError] = useState(false);
+  const [registerBody, setRegisterBody] = useState({
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
+  const [passwordVerification, setPasswordVerification] = useState({
+    password: "",
+    confirmPassword: "",
+  });
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
   const context = useContext(GlobalStateContext);
@@ -22,18 +31,14 @@ export const Register = () => {
     setError(false);
     setInternalError(false);
     setErrorPassword(false);
-    if (state.password === state.confirmPassword) {
-      if (state.password.length > 8) {
-        delete state["confirmPassword"];
-        const body = { ...state };
+    if (
+      passwordVerification.password === passwordVerification.confirmPassword
+    ) {
+      if (registerBody.password.length >= 8) {
         try {
           const URI = global.url + "user";
-          const { data } = await fetchHelper(URI, "POST", body);
-          if (
-            parseInt(data.statusCode) == 404 ||
-            parseInt(data.statusCode) == 401 ||
-            parseInt(data.statusCode) == 400
-          ) {
+          const { data } = await fetchHelper(URI, "POST", registerBody);
+          if (statusCode[data.statusCode]) {
             setInternalError(true);
           } else {
             setSuccess(true);
@@ -52,7 +57,29 @@ export const Register = () => {
       setError(true);
     }
   };
-
+  const changedName = (e) => {
+    setRegisterBody({ ...registerBody, name: e.target.value });
+  };
+  const changedLastname = (e) => {
+    setRegisterBody({ ...registerBody, lastname: e.target.value });
+  };
+  const changedEmail = (e) => {
+    setRegisterBody({ ...registerBody, email: e.target.value });
+  };
+  const changedPassword = (e) => {
+    setRegisterBody({ ...registerBody, password: e.target.value });
+    setPasswordVerification({
+      ...passwordVerification,
+      password: e.target.value,
+    });
+  };
+  const changedConfirmPassword = (e) => {
+    setRegisterBody({ ...registerBody, password: e.target.value });
+    setPasswordVerification({
+      ...passwordVerification,
+      confirmPassword: e.target.value,
+    });
+  };
   return (
     <div className="signup">
       {errorPassword && (
@@ -80,31 +107,31 @@ export const Register = () => {
                 type="text"
                 name="name"
                 placeholder="Name"
-                onChange={changed}
+                onChange={changedName}
               />
               <input
                 type="text"
                 name="lastname"
                 placeholder="Lastname"
-                onChange={changed}
+                onChange={changedLastname}
               />
               <input
                 type="text"
                 name="email"
                 placeholder="Email"
-                onChange={changed}
+                onChange={changedEmail}
               />
               <input
                 type="password"
                 name="password"
                 placeholder="Password"
-                onChange={changed}
+                onChange={changedPassword}
               />
               <input
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm Password"
-                onChange={changed}
+                onChange={changedConfirmPassword}
               />
               <input
                 type="submit"

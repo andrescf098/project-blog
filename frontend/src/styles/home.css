@@ -18,7 +18,7 @@
 .home-card {
     position: relative;
     width: 22%;
-    max-height: auto;
+    max-height: 320px;
     min-width: 120px;
     height: 25%;
     background: white;

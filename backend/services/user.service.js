@@ -62,16 +62,24 @@ async function create(data) {
 }
 
 async function update(id, data) {
-  const hash = await bcrypt.hash(data.password, 10);
-  const dataUpdate = {
-    ...data,
-    password: hash,
-  };
-  const user = await Model.findByIdAndUpdate(id, dataUpdate, { new: true });
-  if (!user) {
-    throw boom.notFound("User not found");
+  if (data.password) {
+    const hash = await bcrypt.hash(data.password, 10);
+    const dataUpdate = {
+      ...data,
+      password: hash,
+    };
+    const user = await Model.findByIdAndUpdate(id, dataUpdate, { new: true });
+    if (!user) {
+      throw boom.notFound("User not found");
+    }
+    return user;
+  } else {
+    const user = await Model.findByIdAndUpdate(id, data, { new: true });
+    if (!user) {
+      throw boom.notFound("User not found");
+    }
+    return user;
   }
-  return user;
 }
 
 async function deleteUser(id) {

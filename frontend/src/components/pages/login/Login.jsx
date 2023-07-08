@@ -1,23 +1,26 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "../../../styles/login.css";
-import { useForm } from "../../../hooks/useForm";
 import { fetchHelper } from "../../../helpers/fetchHelper";
 import { global } from "../../../helpers/global";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { GlobalStateContext } from "../../../context";
+import { statusCode } from "../../../helpers/statusCode";
 
 export const Login = () => {
-  const { state, changed } = useForm({});
+  const [loginBody, setLoginBody] = useState({
+    email: "",
+    password: "",
+  });
   const context = useContext(GlobalStateContext);
   const navigate = useNavigate();
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    const body = { ...state };
+    context.setErrorLogin(false);
     try {
       const URI = global.url + "auth/login";
-      const { data } = await fetchHelper(URI, "POST", body);
-      if (data.statusCode === 404 || data.statusCode === 401) {
+      const { data } = await fetchHelper(URI, "POST", loginBody);
+      if (statusCode[data.statusCode]) {
         context.setErrorLogin(true);
       } else {
         localStorage.setItem("token", data.token);
@@ -29,6 +32,16 @@ export const Login = () => {
     } catch (error) {
       context.setErrorLogin(true);
     }
+  };
+  const changedEmail = (e) => {
+    setLoginBody({ ...loginBody, email: e.target.value });
+  };
+  const changedPassword = (e) => {
+    setLoginBody({ ...loginBody, password: e.target.value });
+  };
+  const refresh = () => {
+    context.setErrorLogin(false);
+    context.setShowLoginBar(false);
   };
 
   return (
@@ -46,15 +59,15 @@ export const Login = () => {
             type="text"
             name="email"
             placeholder="Email"
-            onChange={changed}
+            onChange={changedEmail}
           />
           <input
             type="password"
             name="password"
             placeholder="Password"
-            onChange={changed}
+            onChange={changedPassword}
           />
-          <NavLink to="/sign-up" onClick={() => context.setShowLoginBar(false)}>
+          <NavLink to="/recovery-password" onClick={refresh}>
             Forgot your password?
           </NavLink>
           <input

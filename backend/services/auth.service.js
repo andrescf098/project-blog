@@ -39,7 +39,7 @@ async function sendRecovery(email) {
   }
   const payload = { sub: user.id };
   const token = jwt.sign(payload, config.jwtSecret, { expiresIn: "15m" });
-  const link = `http://myfrontned.com/recovery?token=${token}`;
+  const link = `http://localhost:5173/change-password?token=${token}`;
   await userService.update(user.id, { recoveryToken: token });
   const mail = {
     from: config.smtpAccount,
@@ -72,16 +72,15 @@ async function sendEmail(infoMail) {
 
 async function changePassword(token, newPassword) {
   try {
+    console.log(token);
     const payload = jwt.verify(token, config.jwtSecret);
     const user = await userModel.findById(payload.sub);
-    console.log(user);
     if (user.recoveryToken !== token) {
       throw boom.unauthorized();
     }
-    const hash = await bcrypt.hash(newPassword, 10);
     await userService.update(user.id, {
       recoveryToken: null,
-      password: hash,
+      password: newPassword,
     });
     return { message: "password changed" };
   } catch (error) {

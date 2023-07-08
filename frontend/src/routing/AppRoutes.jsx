@@ -7,6 +7,8 @@ import { Edit } from "../components/pages/article/Edit-article";
 import { Register } from "../components/pages/login/Register";
 import { NotFound } from "../components/pages/NotFound";
 import MyArticles from "../components/pages/article/My-Articles";
+import { PasswordRecovery } from "../components/pages/login/Password-recovery";
+import { ChangePassword } from "../components/pages/login/Change-password";
 
 const AppRoutes = () => {
   const routes = useRoutes([
@@ -37,6 +39,14 @@ const AppRoutes = () => {
     {
       path: "/sign-up",
       element: <Register />,
+    },
+    {
+      path: "/recovery-password",
+      element: <PasswordRecovery />,
+    },
+    {
+      path: "/change-password",
+      element: <ChangePassword />,
     },
     {
       path: "*",

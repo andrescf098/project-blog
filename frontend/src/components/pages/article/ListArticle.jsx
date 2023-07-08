@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import dateUtils from "../../../helpers/date.utils";
-import "../../../styles/login.css";
 import { useContext } from "react";
 import { GlobalStateContext } from "../../../context";
 import { useNavigate } from "react-router-dom";

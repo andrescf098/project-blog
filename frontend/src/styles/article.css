@@ -15,12 +15,18 @@
 }
 
 .article .article-header {
-    padding: 40px;
+    padding: 40px 40px 34px 40px;
 }
 
 .article .article-header h1 {
     font-size: 2.25rem;
     margin-bottom: 8px;
+}
+
+.article .article-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: var(--text-sub);
 }
 
 .article .article-header h3 {

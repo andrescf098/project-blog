@@ -12,7 +12,7 @@ export const Article = () => {
         <section className="article-header">
           <h1>{context.viewArticle.title}</h1>
           <h2>{context.viewArticle.description}</h2>
-          <h3>{context.viewArticle.date}</h3>
+          <h3>{context.viewArticle.date.split("T")[0]}</h3>
         </section>
         <div className="article-separator"></div>
         <section className="article-body">

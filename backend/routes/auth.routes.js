@@ -20,6 +20,7 @@ router.post("/recovery", async (req, res, next) => {
   try {
     const { email } = req.body;
     res.json(await Model.sendRecovery(email));
+    console.log(email);
   } catch (error) {
     next(error);
   }
