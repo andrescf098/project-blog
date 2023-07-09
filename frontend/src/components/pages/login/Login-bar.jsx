@@ -2,21 +2,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "../../../styles/login-bar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { GlobalStateContext } from "../../../context";
-import {
-  adminVerificator,
-  loginVerficiation,
-} from "../../../helpers/sessionUtils";
 
 export const Loginbar = () => {
   const context = useContext(GlobalStateContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    loginVerficiation(context);
-    adminVerificator(context);
-  }, [context.login, context.admin]);
   const logout = () => {
     localStorage.removeItem("token");
     context.setShowLoginBar(false);
@@ -75,10 +67,10 @@ export const Loginbar = () => {
       {context.login && context.admin && (
         <ul>
           <li>
-            <NavLink to="/login">Edit user</NavLink>
+            <NavLink to="/admin-users">Admin users</NavLink>
           </li>
           <li>
-            <NavLink to="/login">Edit articles</NavLink>
+            <NavLink to="/admin-articles">Admin articles</NavLink>
           </li>
           <div className="login-bar-separator"></div>
           <li>

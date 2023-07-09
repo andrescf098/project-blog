@@ -1,16 +1,17 @@
-import { Login } from "../components/pages/login/Login";
 import { Home } from "../components/pages/Home";
 import { Article } from "../components/pages/article/Article";
 import { useRoutes } from "react-router-dom";
-import { Create } from "../components/pages/article/Create-article";
-import { Edit } from "../components/pages/article/Edit-article";
-import { Register } from "../components/pages/login/Register";
 import { NotFound } from "../components/pages/NotFound";
-import MyArticles from "../components/pages/article/My-Articles";
-import { PasswordRecovery } from "../components/pages/login/Password-recovery";
-import { ChangePassword } from "../components/pages/login/Change-password";
+import useLoginVerification from "../helpers/loginVerification";
+import { useContext } from "react";
+import { GlobalStateContext } from "../context";
+import AppRoutesProtect from "./AppRoutesProtect";
 
 const AppRoutes = () => {
+  const protect = new AppRoutesProtect();
+  const context = useContext(GlobalStateContext);
+  useLoginVerification();
+
   const routes = useRoutes([
     {
       path: "/",
@@ -22,31 +23,39 @@ const AppRoutes = () => {
     },
     {
       path: "/create",
-      element: <Create />,
+      element: protect.createArticle(context),
     },
     {
       path: "/edit",
-      element: <Edit />,
+      element: protect.editArticle(context),
     },
     {
       path: "/my-articles",
-      element: <MyArticles />,
+      element: protect.myArticle(context),
     },
     {
       path: "/login",
-      element: <Login />,
+      element: protect.login(context),
     },
     {
       path: "/sign-up",
-      element: <Register />,
+      element: protect.register(context),
     },
     {
       path: "/recovery-password",
-      element: <PasswordRecovery />,
+      element: protect.recoveryPassword(context),
     },
     {
       path: "/change-password",
-      element: <ChangePassword />,
+      element: protect.recoveryPassword(context),
+    },
+    {
+      path: "/admin-users",
+      element: protect.adminUsers(context),
+    },
+    {
+      path: "/admin-articles",
+      element: protect.adminArticles(context),
     },
     {
       path: "*",

@@ -2,7 +2,8 @@
     position: absolute;
     right: -1px;
     top: 40px;
-    width: 110px;
+    width: auto;
+    max-width: 220px;
     height: auto;
     background: white;
     border: 1px solid var(--text2);
@@ -24,7 +25,10 @@
 }
 
 .login-bar li {
-    padding: 6px;
+    width: 100%;
+    margin: 4px;
+    padding: 4px;
+    text-align: center;
 }
 
 .login-bar li span {
