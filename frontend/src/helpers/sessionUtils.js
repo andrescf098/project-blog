@@ -18,7 +18,7 @@ export const adminVerificator = (context) => {
       context.setAdmin(false);
     }
   } catch (error) {
-    console.error(error);
+    context.setAdmin(false);
   }
 };
 export const getIdFromToken = () => {

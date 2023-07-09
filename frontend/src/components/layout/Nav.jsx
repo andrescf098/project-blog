@@ -2,9 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/navbar.css";
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Loginbar } from "../pages/login/Login-bar";
 import { GlobalStateContext } from "../../context";
+import { loginVerficiation } from "../../helpers/sessionUtils";
 
 export const Nav = () => {
   const context = useContext(GlobalStateContext);
@@ -13,6 +14,9 @@ export const Nav = () => {
     context.setShowLoginBar((current) => !current);
     console.log(context.showLoginBar);
   };
+  useEffect(() => {
+    loginVerficiation(context);
+  }, []);
 
   return (
     <nav className="navbar">

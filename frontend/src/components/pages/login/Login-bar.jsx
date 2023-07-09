@@ -4,7 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useEffect } from "react";
 import { GlobalStateContext } from "../../../context";
-import { loginVerficiation } from "../../../helpers/sessionUtils";
+import {
+  adminVerificator,
+  loginVerficiation,
+} from "../../../helpers/sessionUtils";
 
 export const Loginbar = () => {
   const context = useContext(GlobalStateContext);
@@ -12,6 +15,7 @@ export const Loginbar = () => {
 
   useEffect(() => {
     loginVerficiation(context);
+    adminVerificator(context);
   }, [context.login, context.admin]);
   const logout = () => {
     localStorage.removeItem("token");
