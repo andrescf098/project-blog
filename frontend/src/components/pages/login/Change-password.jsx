@@ -28,7 +28,6 @@ export const ChangePassword = () => {
           newPassword: e.target.password.value,
           token: urlParams.get("token"),
         };
-        console.log(body);
         const URI = global.url + "auth/change-password";
         await fetchHelper(URI, "POST", body);
         setSuccess(true);

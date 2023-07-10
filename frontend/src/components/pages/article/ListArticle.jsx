@@ -16,7 +16,6 @@ const ListArticle = ({ userId, date, title, description, content }) => {
       content: content,
       date: date,
     });
-    console.log(context.viewArticle);
     navigate("/article");
   };
 

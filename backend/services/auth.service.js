@@ -72,7 +72,6 @@ async function sendEmail(infoMail) {
 
 async function changePassword(token, newPassword) {
   try {
-    console.log(token);
     const payload = jwt.verify(token, config.jwtSecret);
     const user = await userModel.findById(payload.sub);
     if (user.recoveryToken !== token) {

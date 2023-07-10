@@ -7,8 +7,10 @@ export const GlobalStateProvider = ({ children }) => {
   const [login, setLogin] = useState(false);
   const [admin, setAdmin] = useState(false);
   const [showLoginBar, setShowLoginBar] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const [errorLogin, setErrorLogin] = useState(false);
   const [viewArticle, setViewArticle] = useState({});
+  const [searchData, setSearchData] = useState("");
   return (
     <GlobalStateContext.Provider
       value={{
@@ -18,10 +20,14 @@ export const GlobalStateProvider = ({ children }) => {
         setAdmin,
         showLoginBar,
         setShowLoginBar,
+        showSearch,
+        setShowSearch,
         errorLogin,
         setErrorLogin,
         viewArticle,
         setViewArticle,
+        searchData,
+        setSearchData,
       }}
     >
       {children}

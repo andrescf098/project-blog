@@ -40,7 +40,6 @@ class AppRoutesProtect {
     return this.#response(context.login, <Home />, <ChangePassword />);
   }
   adminUsers(context) {
-    console.log("admin", context.admin);
     return this.#response(
       context.login && context.admin,
       <AdminUsers />,

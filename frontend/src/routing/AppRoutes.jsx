@@ -6,6 +6,7 @@ import useLoginVerification from "../helpers/loginVerification";
 import { useContext } from "react";
 import { GlobalStateContext } from "../context";
 import AppRoutesProtect from "./AppRoutesProtect";
+import { Search } from "../components/pages/article/Search";
 
 const AppRoutes = () => {
   const protect = new AppRoutesProtect();
@@ -56,6 +57,10 @@ const AppRoutes = () => {
     {
       path: "/admin-articles",
       element: protect.adminArticles(context),
+    },
+    {
+      path: "/search",
+      element: <Search />,
     },
     {
       path: "*",

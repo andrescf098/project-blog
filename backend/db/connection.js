@@ -9,7 +9,6 @@ db.Promise = global.Promise;
 
 const connect = async () => {
   try {
-    console.log(URI);
     const connectDB = await db.connect(URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

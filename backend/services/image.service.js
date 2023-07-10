@@ -29,7 +29,6 @@ async function uploadImage(id, image) {
 
 function findImage(filename) {
   return new Promise((resolve, reject) => {
-    console.log(filename);
     let pathFile = "./assets/images/articles/" + filename;
     fs.stat(pathFile, (err, exist) => {
       if (exist) {

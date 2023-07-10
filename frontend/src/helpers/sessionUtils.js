@@ -11,7 +11,6 @@ export const adminVerificator = (context) => {
   try {
     let token = localStorage.getItem("token");
     let role = jose.decodeJwt(token).role;
-    console.log(role);
     if (role === "admin") {
       context.setAdmin(true);
     } else {

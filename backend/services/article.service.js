@@ -25,6 +25,9 @@ async function findOne(param) {
   if (!response) {
     throw boom.notFound("Article not found");
   }
+  if (limit) {
+    response.limit(limit);
+  }
   return response;
 }
 async function findOne(param) {

@@ -10,7 +10,6 @@ export const Sidebar = () => {
 
   const userInfo = async () => {
     try {
-      console.log(context.viewArticle);
       const URI = global.url + "user/" + context.viewArticle.userId;
       const { data } = await fetchHelper(URI, "GET");
       setUser(data);

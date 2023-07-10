@@ -36,7 +36,9 @@ router.get(
 
 router.get("/find/:find", async (req, res, next) => {
   try {
-    res.status(200).json(await service.findOne(req.params.find));
+    res
+      .status(200)
+      .json(await service.findOne(req.params.find, req.params.limit));
   } catch (error) {
     next(error);
   }
