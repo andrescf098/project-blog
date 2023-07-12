@@ -7,6 +7,8 @@ import { useContext } from "react";
 import { GlobalStateContext } from "../context";
 import AppRoutesProtect from "./AppRoutesProtect";
 import { Search } from "../components/pages/article/Search";
+import MyAccountInfo from "../components/pages/login/My-account-info";
+import MyAccountImage from "../components/pages/login/My-account-image";
 
 const AppRoutes = () => {
   const protect = new AppRoutesProtect();
@@ -19,47 +21,61 @@ const AppRoutes = () => {
       element: <Home />,
     },
     {
-      path: "/article",
+      path: "article",
       element: <Article />,
     },
     {
-      path: "/create",
+      path: "create",
       element: protect.createArticle(context),
     },
     {
-      path: "/edit",
+      path: "edit",
       element: protect.editArticle(context),
     },
     {
-      path: "/my-articles",
+      path: "my-articles",
       element: protect.myArticle(context),
     },
     {
-      path: "/login",
+      path: "login",
       element: protect.login(context),
     },
     {
-      path: "/sign-up",
+      path: "sign-up",
       element: protect.register(context),
     },
     {
-      path: "/recovery-password",
+      path: "recovery-password",
       element: protect.recoveryPassword(context),
     },
     {
-      path: "/change-password",
+      path: "change-password",
       element: protect.recoveryPassword(context),
     },
     {
-      path: "/admin-users",
+      path: "admin-users",
       element: protect.adminUsers(context),
     },
     {
-      path: "/admin-articles",
+      path: "admin-articles",
       element: protect.adminArticles(context),
     },
     {
-      path: "/search",
+      path: "my-account",
+      element: protect.myAccount(context),
+      children: [
+        {
+          path: "info",
+          element: <MyAccountInfo />,
+        },
+        {
+          path: "image",
+          element: <MyAccountImage />,
+        },
+      ],
+    },
+    {
+      path: "search",
       element: <Search />,
     },
     {

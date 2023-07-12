@@ -27,10 +27,13 @@ const MyArticles = () => {
               <ListArticle
                 key={index}
                 userId={article.user}
+                id={article._id}
                 date={article.createAt}
                 title={article.title}
                 description={article.description}
+                image={article.image}
                 content={article.content}
+                edit={true}
               />
             );
           })

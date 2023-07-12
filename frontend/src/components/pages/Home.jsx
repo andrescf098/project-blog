@@ -29,6 +29,7 @@ export const Home = () => {
                 date={article.createAt}
                 title={article.title}
                 description={article.description}
+                image={article.image}
                 content={article.content}
               />
             );

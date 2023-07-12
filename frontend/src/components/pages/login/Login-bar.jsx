@@ -51,7 +51,7 @@ export const Loginbar = () => {
       {context.login && !context.admin && (
         <ul>
           <li>
-            <NavLink to="/login">My Account</NavLink>
+            <NavLink to="/my-account">My Account</NavLink>
           </li>
           <div className="login-bar-separator"></div>
           <li>

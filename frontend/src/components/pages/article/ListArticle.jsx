@@ -3,10 +3,23 @@ import dateUtils from "../../../helpers/date.utils";
 import { useContext } from "react";
 import { GlobalStateContext } from "../../../context";
 import { useNavigate } from "react-router-dom";
+import { global } from "../../../helpers/global";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const ListArticle = ({ userId, date, title, description, content }) => {
+const ListArticle = ({
+  userId,
+  id,
+  date,
+  title,
+  description,
+  content,
+  image = "",
+  edit = false,
+}) => {
   const context = useContext(GlobalStateContext);
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   const view = () => {
     context.setViewArticle({
@@ -14,9 +27,23 @@ const ListArticle = ({ userId, date, title, description, content }) => {
       title: title,
       description: description,
       content: content,
+      image: image,
       date: date,
     });
     navigate("/article");
+  };
+  const deleteHandler = async () => {
+    const URI = global.url + "articles/article/" + id;
+    await fetch(URI, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    window.location.reload(true);
+  };
+  const editHandler = () => {
+    navigate(`/edit?id=${id}`);
   };
 
   return (
@@ -25,9 +52,27 @@ const ListArticle = ({ userId, date, title, description, content }) => {
         <p>{date ? dateUtils.getDayFromData(date) : ""}</p>
         <p>{date ? dateUtils?.getMonthFromData(date) : ""}</p>
       </div>
+      {edit === true && (
+        <div className="home-card-options">
+          <div className="home-card-edit">
+            <p>
+              <FontAwesomeIcon icon={faPen} onClick={editHandler} />
+            </p>
+          </div>
+          <div className="home-card-delete" onClick={deleteHandler}>
+            <p>
+              <FontAwesomeIcon icon={faTrash} />
+            </p>
+          </div>
+        </div>
+      )}
       <img
         className="home-card-img"
-        src="https://www.blogdelfotografo.com/wp-content/uploads/2020/04/fotografo-paisajes.jpg"
+        src={
+          !image
+            ? "https://www.blogdelfotografo.com/wp-content/uploads/2020/04/fotografo-paisajes.jpg"
+            : `${global.url}image/${image}`
+        }
         alt=""
       />
       <div className="home-card-content">
@@ -45,10 +90,13 @@ const ListArticle = ({ userId, date, title, description, content }) => {
 
 ListArticle.propTypes = {
   userId: PropTypes.string,
+  id: PropTypes.string,
   date: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
   content: PropTypes.string,
+  image: PropTypes.string,
+  edit: PropTypes.bool,
 };
 
 export default ListArticle;

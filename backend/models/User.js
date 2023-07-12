@@ -18,6 +18,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    default: "user.png",
+  },
   recoveryToken: {
     type: String,
   },

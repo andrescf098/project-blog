@@ -13,7 +13,14 @@ router.get("/:file", async (req, res, next) => {
 
 router.post("/:id", [upload.single("file0")], async (req, res, next) => {
   try {
-    res.json(await service.uploadImage(req.params.id, req.file));
+    res.json(await service.upload(req.params.id, req.file));
+  } catch (error) {
+    next(error);
+  }
+});
+router.post("/user/:id", [upload.single("file0")], async (req, res, next) => {
+  try {
+    res.json(await service.uploadUser(req.params.id, req.file));
   } catch (error) {
     next(error);
   }

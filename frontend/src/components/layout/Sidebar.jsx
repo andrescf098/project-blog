@@ -23,12 +23,12 @@ export const Sidebar = () => {
   }, [context.viewArticle]);
 
   return (
-    <div>
+    <div className="sidebar">
       <section className="sidebar-user">
         <div className="sidebar-user">
           <img
             className="logo-user"
-            src="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg?w=136&h=136"
+            src={`${global.url}image/${user?.image}`}
             alt=""
           />
           <div>
@@ -46,7 +46,11 @@ export const Sidebar = () => {
             <div key={index} className="card-container">
               <img
                 className="card-img"
-                src="https://www.blogdelfotografo.com/wp-content/uploads/2020/04/fotografo-paisajes.jpg"
+                src={
+                  !article?.image
+                    ? "https://www.blogdelfotografo.com/wp-content/uploads/2020/04/fotografo-paisajes.jpg"
+                    : `${global.url}image/${article?.image}`
+                }
                 alt=""
               />
               <div className="card-content">
@@ -56,7 +60,7 @@ export const Sidebar = () => {
                 </div>
                 <img
                   className="logo-user"
-                  src="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg?w=136&h=136"
+                  src={`${global.url}image/${user?.image}`}
                   alt=""
                 />
               </div>

@@ -28,6 +28,7 @@ async function findOne(id) {
     name: user.name,
     lastname: user.lastname,
     email: user.email,
+    image: user.image,
     role: user.role,
   };
   if (!user) {

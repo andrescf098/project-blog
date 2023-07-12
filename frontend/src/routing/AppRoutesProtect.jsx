@@ -6,6 +6,7 @@ import MyArticles from "../components/pages/article/My-Articles";
 import AdminUsers from "../components/pages/login/AdminUsers";
 import { ChangePassword } from "../components/pages/login/Change-password";
 import { Login } from "../components/pages/login/Login";
+import MyAccount from "../components/pages/login/My-account";
 import { PasswordRecovery } from "../components/pages/login/Password-recovery";
 import { Register } from "../components/pages/login/Register";
 
@@ -38,6 +39,14 @@ class AppRoutesProtect {
   }
   changePassword(context) {
     return this.#response(context.login, <Home />, <ChangePassword />);
+  }
+  myAccount(context) {
+    return this.#response(
+      context.login,
+      <MyAccount />,
+
+      <Home />
+    );
   }
   adminUsers(context) {
     return this.#response(
