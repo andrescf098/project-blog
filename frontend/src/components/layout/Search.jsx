@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { global } from "../../../helpers/global";
-import { fetchHelper } from "../../../helpers/fetchHelper";
-import NotFoundArticle from "./NotFoundArticle";
-import "../../../styles/search.css";
-import dateUtils from "../../../helpers/date.utils";
-import { GlobalStateContext } from "../../../context";
+import { global } from "../../helpers/global";
+import { fetchHelper } from "../../helpers/fetchHelper";
+import NotFoundArticle from "../pages/article/NotFound-Article";
+import "../../styles/search.css";
+import dateUtils from "../../helpers/date.utils";
+import { GlobalStateContext } from "../../context";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export const Search = () => {
+const Search = () => {
   const [articles, setArticles] = useState([]);
   const [search, setSearch] = useState("");
   const context = useContext(GlobalStateContext);
@@ -102,3 +102,4 @@ export const Search = () => {
     </div>
   );
 };
+export default Search;

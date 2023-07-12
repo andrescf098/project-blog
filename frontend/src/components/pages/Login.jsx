@@ -1,12 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import "../../../styles/login.css";
-import { fetchHelper } from "../../../helpers/fetchHelper";
-import { global } from "../../../helpers/global";
+import "../../styles/login.css";
+import { fetchHelper } from "../../helpers/fetchHelper";
+import { global } from "../../helpers/global";
 import { useContext, useState } from "react";
-import { GlobalStateContext } from "../../../context";
-import { statusCode } from "../../../helpers/statusCode";
+import { GlobalStateContext } from "../../context";
+import { statusCode } from "../../helpers/statusCode";
 
-export const Login = () => {
+const Login = () => {
   const [loginBody, setLoginBody] = useState({
     email: "",
     password: "",
@@ -87,3 +87,4 @@ export const Login = () => {
     </div>
   );
 };
+export default Login;

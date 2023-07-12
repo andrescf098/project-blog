@@ -4,7 +4,7 @@ import { global } from "../../helpers/global";
 import { fetchHelper } from "../../helpers/fetchHelper";
 import { GlobalStateContext } from "../../context";
 
-export const Sidebar = () => {
+const Sidebar = () => {
   const context = useContext(GlobalStateContext);
   const [user, setUser] = useState();
 
@@ -71,3 +71,4 @@ export const Sidebar = () => {
     </div>
   );
 };
+export default Sidebar;

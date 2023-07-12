@@ -3,11 +3,11 @@ import { faUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/navbar.css";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import { Loginbar } from "../pages/login/Login-bar";
+import LoginBar from "./Loginbar";
 import { GlobalStateContext } from "../../context";
 import SearchBar from "./SearchBar";
 
-export const Nav = () => {
+const Nav = () => {
   const context = useContext(GlobalStateContext);
 
   const showLogin = () => {
@@ -56,8 +56,10 @@ export const Nav = () => {
           </li>
         </ul>
       </div>
-      {context.showLoginBar && <Loginbar />}
+      {context.showLoginBar && <LoginBar />}
       {context.showSearch && <SearchBar />}
     </nav>
   );
 };
+
+export default Nav;

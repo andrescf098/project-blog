@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
-import { GlobalStateContext } from "../../../context";
+import { GlobalStateContext } from "../../context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { fetchHelper } from "../../../helpers/fetchHelper";
-import { global } from "../../../helpers/global";
+import { fetchHelper } from "../../helpers/fetchHelper";
+import { global } from "../../helpers/global";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export const ChangePassword = () => {
+const ChangePassword = () => {
   const [error, setError] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -87,3 +87,4 @@ export const ChangePassword = () => {
     </div>
   );
 };
+export default ChangePassword;

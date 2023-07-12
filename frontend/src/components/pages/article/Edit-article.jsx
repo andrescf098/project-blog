@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { fetchHelper } from "../../../helpers/fetchHelper";
 
-export const Edit = () => {
+const Edit = () => {
   const [articleEdit, setArticleEdit] = useState({});
   const [article, setArticle] = useState({});
   const [error, setError] = useState(false);
@@ -161,3 +161,4 @@ export const Edit = () => {
     </div>
   );
 };
+export default Edit;

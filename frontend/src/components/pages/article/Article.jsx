@@ -1,10 +1,10 @@
-import { Sidebar } from "../../layout/Sidebar";
+import Sidebar from "../../layout/Sidebar";
 import "../../../styles/article.css";
 import { useContext } from "react";
 import { GlobalStateContext } from "../../../context";
 import { global } from "../../../helpers/global";
 
-export const Article = () => {
+const Article = () => {
   const context = useContext(GlobalStateContext);
   return (
     <div className="article-container">
@@ -31,3 +31,4 @@ export const Article = () => {
     </div>
   );
 };
+export default Article;

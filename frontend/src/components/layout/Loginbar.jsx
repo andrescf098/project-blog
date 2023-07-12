@@ -1,11 +1,15 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import "../../../styles/login-bar.css";
+import "../../styles/login-bar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleUser,
+  faPenToSquare,
+  faSliders,
+} from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
-import { GlobalStateContext } from "../../../context";
+import { GlobalStateContext } from "../../context";
 
-export const Loginbar = () => {
+const LoginBar = () => {
   const context = useContext(GlobalStateContext);
   const navigate = useNavigate();
 
@@ -67,10 +71,12 @@ export const Loginbar = () => {
       {context.login && context.admin && (
         <ul>
           <li>
-            <NavLink to="/admin-users">Admin users</NavLink>
-          </li>
-          <li>
-            <NavLink to="/admin-articles">Admin articles</NavLink>
+            <NavLink to="/admin-panel">
+              <span>
+                <FontAwesomeIcon icon={faSliders} />
+              </span>{" "}
+              Admin panel
+            </NavLink>
           </li>
           <div className="login-bar-separator"></div>
           <li>
@@ -86,3 +92,4 @@ export const Loginbar = () => {
     </div>
   );
 };
+export default LoginBar;

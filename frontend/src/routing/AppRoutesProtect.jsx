@@ -1,14 +1,13 @@
-import { Home } from "../components/pages/Home";
-import AdminArticles from "../components/pages/article/Admin-Articles";
-import { Create } from "../components/pages/article/Create-article";
-import { Edit } from "../components/pages/article/Edit-article";
+import Home from "../components/pages/Home";
+import Create from "../components/pages/article/Create-article";
+import Edit from "../components/pages/article/Edit-article";
 import MyArticles from "../components/pages/article/My-Articles";
-import AdminUsers from "../components/pages/login/AdminUsers";
-import { ChangePassword } from "../components/pages/login/Change-password";
-import { Login } from "../components/pages/login/Login";
-import MyAccount from "../components/pages/login/My-account";
-import { PasswordRecovery } from "../components/pages/login/Password-recovery";
-import { Register } from "../components/pages/login/Register";
+import ChangePassword from "../components/pages/Change-password";
+import Login from "../components/pages/Login";
+import MyAccount from "../components/pages/user/MyAccount";
+import PasswordRecovery from "../components/pages/Password-recovery";
+import Register from "../components/pages/Register";
+import AdminPanel from "../components/pages/user/Admin-Panel";
 
 class AppRoutesProtect {
   #response(condition, route1, route2) {
@@ -48,17 +47,10 @@ class AppRoutesProtect {
       <Home />
     );
   }
-  adminUsers(context) {
+  adminPanel(context) {
     return this.#response(
       context.login && context.admin,
-      <AdminUsers />,
-      <Home />
-    );
-  }
-  adminArticles(context) {
-    return this.#response(
-      context.login && context.admin,
-      <AdminArticles />,
+      <AdminPanel />,
       <Home />
     );
   }

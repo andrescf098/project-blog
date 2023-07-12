@@ -50,6 +50,11 @@ const MyAccountImage = () => {
   }, []);
   return (
     <>
+      {error && (
+        <div className="error-profile">
+          <p>Profile could not be edited</p>
+        </div>
+      )}
       {!success ? (
         <form className="myAccount-content">
           <h1>PROFILE IMAGE</h1>

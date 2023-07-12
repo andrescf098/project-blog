@@ -1,14 +1,18 @@
-import { Home } from "../components/pages/Home";
-import { Article } from "../components/pages/article/Article";
+import Home from "../components/pages/Home";
+import Article from "../components/pages/article/Article";
 import { useRoutes } from "react-router-dom";
-import { NotFound } from "../components/pages/NotFound";
+import NotFound from "../components/pages/NotFound";
 import useLoginVerification from "../helpers/loginVerification";
 import { useContext } from "react";
 import { GlobalStateContext } from "../context";
 import AppRoutesProtect from "./AppRoutesProtect";
-import { Search } from "../components/pages/article/Search";
-import MyAccountInfo from "../components/pages/login/My-account-info";
-import MyAccountImage from "../components/pages/login/My-account-image";
+import Search from "../components/layout/Search";
+import MyAccountInfo from "../components/pages/user/MyAccount-Info";
+import MyAccountImage from "../components/pages/user/MyAccount-Image";
+import AdminUsers from "../components/pages/user/admin/Admin-Users";
+import AdminArticles from "../components/pages/article/admin/Admin-Articles";
+import AdminUser from "../components/pages/user/admin/Admin-user";
+import AdminArticle from "../components/pages/article/admin/Admin-article";
 
 const AppRoutes = () => {
   const protect = new AppRoutesProtect();
@@ -50,15 +54,29 @@ const AppRoutes = () => {
     },
     {
       path: "change-password",
-      element: protect.recoveryPassword(context),
+      element: protect.changePassword(context),
     },
     {
-      path: "admin-users",
-      element: protect.adminUsers(context),
-    },
-    {
-      path: "admin-articles",
-      element: protect.adminArticles(context),
+      path: "admin-panel",
+      element: protect.adminPanel(context),
+      children: [
+        {
+          path: "users",
+          element: <AdminUsers />,
+        },
+        {
+          path: "user",
+          element: <AdminUser />,
+        },
+        {
+          path: "articles",
+          element: <AdminArticles />,
+        },
+        {
+          path: "article",
+          element: <AdminArticle />,
+        },
+      ],
     },
     {
       path: "my-account",

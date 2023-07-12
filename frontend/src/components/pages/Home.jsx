@@ -2,10 +2,10 @@ import { fetchHelper } from "../../helpers/fetchHelper";
 import { global } from "../../helpers/global";
 import "../../styles/home.css";
 import { useEffect, useState } from "react";
-import ListArticle from "./article/ListArticle";
-import NotFoundArticle from "./article/NotFoundArticle";
+import ListArticle from "./article/List-Article";
+import NotFoundArticle from "./article/NotFound-Article";
 
-export const Home = () => {
+const Home = () => {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     getArticles();
@@ -41,3 +41,4 @@ export const Home = () => {
     </div>
   );
 };
+export default Home;

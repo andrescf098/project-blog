@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
-import { GlobalStateContext } from "../../../context";
-import { global } from "../../../helpers/global";
-import { fetchHelper } from "../../../helpers/fetchHelper";
+import { GlobalStateContext } from "../../context";
+import { global } from "../../helpers/global";
+import { fetchHelper } from "../../helpers/fetchHelper";
 import { useNavigate } from "react-router-dom";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../../styles/recovery.css";
+import "../../styles/recovery.css";
 
-export const PasswordRecovery = () => {
+const PasswordRecovery = () => {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const context = useContext(GlobalStateContext);
@@ -67,3 +67,4 @@ export const PasswordRecovery = () => {
     </div>
   );
 };
+export default PasswordRecovery;

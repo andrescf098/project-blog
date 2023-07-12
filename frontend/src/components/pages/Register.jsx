@@ -1,14 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import "../../../styles/register.css";
+import "../../styles/register.css";
 import { useContext, useState } from "react";
-import { global } from "../../../helpers/global";
-import { fetchHelper } from "../../../helpers/fetchHelper";
+import { global } from "../../helpers/global";
+import { fetchHelper } from "../../helpers/fetchHelper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { GlobalStateContext } from "../../../context";
-import { statusCode } from "../../../helpers/statusCode";
+import { GlobalStateContext } from "../../context";
+import { statusCode } from "../../helpers/statusCode";
 
-export const Register = () => {
+const Register = () => {
   const [error, setError] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [internalError, setInternalError] = useState(false);
@@ -161,3 +161,4 @@ export const Register = () => {
     </div>
   );
 };
+export default Register;

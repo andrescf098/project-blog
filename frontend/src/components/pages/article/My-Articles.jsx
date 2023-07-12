@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { global } from "../../../helpers/global";
 import { fetchHelper } from "../../../helpers/fetchHelper";
-import ListArticle from "./ListArticle";
-import NotFoundArticle from "./NotFoundArticle";
+import ListArticle from "./List-Article";
+import NotFoundArticle from "./NotFound-Article";
 import { getIdFromToken } from "../../../helpers/sessionUtils";
 
 const MyArticles = () => {
