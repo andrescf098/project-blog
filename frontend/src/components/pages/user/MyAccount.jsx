@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import "../../../styles/myAccount.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,8 +6,18 @@ import {
   faRightFromBracket,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { GlobalStateContext } from "../../../context";
 
 const MyAccount = () => {
+  const context = useContext(GlobalStateContext);
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("token");
+    context.setShowLoginBar(false);
+    context.setLogin(false);
+    navigate("/login");
+  };
   return (
     <div className="myAccount">
       <section className="myAccount-options">
@@ -34,7 +44,7 @@ const MyAccount = () => {
             <div className="myAccount-options-separator"></div>
           </li>
           <li>
-            <NavLink to="/my-account/image">
+            <NavLink to="/my-account/image" onClick={logout}>
               <span>
                 <FontAwesomeIcon icon={faRightFromBracket} />
               </span>

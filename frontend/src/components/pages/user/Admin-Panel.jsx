@@ -1,6 +1,7 @@
 import { faImage, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink, Outlet } from "react-router-dom";
+import "../../../styles/adminPanel.css";
 
 const AdminPanel = () => {
   return (
