@@ -1,31 +1,45 @@
 import Sidebar from "../../layout/Sidebar";
 import "../../../styles/article.css";
-import { useContext } from "react";
-import { GlobalStateContext } from "../../../context";
+import { useEffect, useState } from "react";
 import { global } from "../../../helpers/global";
+import { useLocation } from "react-router-dom";
+import { fetchHelper } from "../../../helpers/fetchHelper";
 
 const Article = () => {
-  const context = useContext(GlobalStateContext);
+  const [article, setArticle] = useState({});
+  const [userId, setUseId] = useState("");
+  const local = useLocation();
+  const urlParams = new URLSearchParams(local.search);
+
+  const getArticle = async () => {
+    const URI = global.url + "articles/article/" + urlParams.get("id");
+    const { data } = await fetchHelper(URI, "GET");
+    setArticle(data);
+    setUseId(data.user._id);
+  };
+  useEffect(() => {
+    getArticle();
+  }, []);
   return (
     <div className="article-container">
-      <Sidebar />
+      {userId.length > 0 && <Sidebar userId={userId} />}
       <article className="article">
         <section className="article-header">
-          <h1>{context.viewArticle?.title}</h1>
-          <h2>{context.viewArticle?.description}</h2>
-          <h3>{context.viewArticle?.date?.split("T")[0]}</h3>
+          <h1>{article?.title}</h1>
+          <h2>{article?.description}</h2>
+          <h3>{article.createAt?.split("T")[0]}</h3>
         </section>
         <div className="article-separator"></div>
         <section className="article-body">
           <img
             src={
-              !context.viewArticle?.image
+              !article?.image
                 ? "https://www.blogdelfotografo.com/wp-content/uploads/2020/04/fotografo-paisajes.jpg"
-                : `${global.url}image/${context.viewArticle?.image}`
+                : `${global.url}image/${article?.image}`
             }
             alt=""
           />
-          <p>{context.viewArticle.content}</p>
+          <p>{article.content}</p>
         </section>
       </article>
     </div>

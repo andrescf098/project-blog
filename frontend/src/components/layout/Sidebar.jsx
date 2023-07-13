@@ -1,16 +1,16 @@
 import "../../styles/sidebar.css";
-import { useContext, useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import { global } from "../../helpers/global";
 import { fetchHelper } from "../../helpers/fetchHelper";
-import { GlobalStateContext } from "../../context";
 
-const Sidebar = () => {
-  const context = useContext(GlobalStateContext);
+const Sidebar = ({ userId }) => {
   const [user, setUser] = useState();
 
   const userInfo = async () => {
+    console.log("userId", userId);
     try {
-      const URI = global.url + "user/" + context.viewArticle.userId;
+      const URI = global.url + "user/" + userId;
       const { data } = await fetchHelper(URI, "GET");
       setUser(data);
     } catch (error) {
@@ -20,7 +20,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     userInfo();
-  }, [context.viewArticle]);
+  }, []);
 
   return (
     <div className="sidebar">
@@ -70,5 +70,8 @@ const Sidebar = () => {
       </section>
     </div>
   );
+};
+Sidebar.propTypes = {
+  userId: PropTypes.string,
 };
 export default Sidebar;

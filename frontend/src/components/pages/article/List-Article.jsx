@@ -1,36 +1,23 @@
 import PropTypes from "prop-types";
 import dateUtils from "../../../helpers/date.utils";
-import { useContext } from "react";
-import { GlobalStateContext } from "../../../context";
 import { useNavigate } from "react-router-dom";
 import { global } from "../../../helpers/global";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ListArticle = ({
-  userId,
   id,
   date,
   title,
   description,
-  content,
   image = "",
   edit = false,
 }) => {
-  const context = useContext(GlobalStateContext);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   const view = () => {
-    context.setViewArticle({
-      userId: userId,
-      title: title,
-      description: description,
-      content: content,
-      image: image,
-      date: date,
-    });
-    navigate("/article");
+    navigate(`/article?id=${id}`);
   };
   const deleteHandler = async () => {
     const URI = global.url + "articles/article/" + id;
@@ -89,7 +76,6 @@ const ListArticle = ({
 };
 
 ListArticle.propTypes = {
-  userId: PropTypes.string,
   id: PropTypes.string,
   date: PropTypes.string,
   title: PropTypes.string,
