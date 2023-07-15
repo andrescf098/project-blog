@@ -18,7 +18,6 @@ const SearchBar = () => {
     }
   };
   const view = (article) => {
-    console.log(article);
     context.setViewArticle({
       userId: article.user._id,
       title: article.title,

@@ -1,11 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faMagnifyingGlass,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
 import "../../styles/navbar.css";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import LoginBar from "./Loginbar";
 import { GlobalStateContext } from "../../context";
 import SearchBar from "./SearchBar";
+import NavDropdown from "./Navbar-dropdown";
 
 const Nav = () => {
   const context = useContext(GlobalStateContext);
@@ -27,6 +32,12 @@ const Nav = () => {
         <p>PERSONAL BLOG</p>
       </div>
       <div className="nav-section">
+        <div
+          className="nav-dropdown"
+          onClick={() => context.setShowNavbar((current) => !current)}
+        >
+          <FontAwesomeIcon icon={faBars} />
+        </div>
         <ul className="nav-links">
           <li>
             <NavLink to="/">Home</NavLink>
@@ -58,6 +69,7 @@ const Nav = () => {
       </div>
       {context.showLoginBar && <LoginBar />}
       {context.showSearch && <SearchBar />}
+      {context.showNavbar && <NavDropdown />}
     </nav>
   );
 };

@@ -8,7 +8,6 @@ const Sidebar = ({ userId }) => {
   const [user, setUser] = useState();
 
   const userInfo = async () => {
-    console.log("userId", userId);
     try {
       const URI = global.url + "user/" + userId;
       const { data } = await fetchHelper(URI, "GET");

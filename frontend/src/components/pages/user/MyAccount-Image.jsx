@@ -17,7 +17,6 @@ const MyAccountImage = () => {
 
   const editAccount = async (e) => {
     e.preventDefault();
-    console.log(user);
     const fileInput = document.querySelector("#file");
     const formData = new FormData();
     formData.append("file0", fileInput.files[0]);
@@ -25,7 +24,6 @@ const MyAccountImage = () => {
       method: "POST",
       body: formData,
     });
-    console.log(response);
     if (statusCode[response.status]) {
       setError(true);
     } else {
@@ -40,7 +38,6 @@ const MyAccountImage = () => {
     const URI = global.url + "user/" + userId;
     const { data } = await fetchHelper(URI, "GET");
     setUser(data);
-    console.log(user);
   };
   const imageChange = () => {
     setBlock(false);

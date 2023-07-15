@@ -1,4 +1,5 @@
 .sidebar {
+    grid-area: b;
     height: 90vh;
     overflow-y: scroll;
 }
@@ -37,7 +38,7 @@
 }
 
 .sidebar-cards .card-container {
-    width: 80%;
+    width: 85%;
     height: auto;
     background: white;
     border: 1px solid var(--text2);
