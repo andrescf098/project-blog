@@ -60,7 +60,8 @@
     transition: 300ms;
 }
 
-.navbar .nav-links li:hover {
+.navbar .nav-links li a:hover {
+    color: black;
     text-decoration: underline;
 }
 
