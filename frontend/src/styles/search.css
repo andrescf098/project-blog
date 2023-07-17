@@ -1,5 +1,6 @@
 .search {
     display: grid;
+    height: 90vh;
     grid-template-columns: 4fr 1fr 20fr;
     margin-left: auto;
     margin-right: auto;
